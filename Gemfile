@@ -4,8 +4,8 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.2'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
-
+#gem 'sqlite3'
+gem 'mysql2'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
@@ -19,7 +19,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'therubyracer', platforms: :ruby
 gem 'execjs'
 gem 'bootstrap-sass', '2.3.2.0'
-
+gem 'bcrypt-ruby', '3.1.2'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
