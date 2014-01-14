@@ -1,0 +1,316 @@
+============================================================================================
+					VIEWS :
+============================================================================================
+- A database view displays one or more database records on the same page.
+- A view can display some or all of the database fields. 
+- Views have filters to determine which records they show.
+- Views can be sorted to control the record order and grouped to display records in related sets.
+- Most users interact with the database using the database views.
+
+Sample VIEW GENERATED :-
+
+CREATE VIEW pmt_view AS
+SELECT pmt_sr_no,pmt_operational_voltage1,pmt_gain1
+FROM pmt
+WHERE pmt_operational_voltage2=-2000;
+
+pmt_sr_no	pmt_operational_voltage1	pmt_gain1
+66353			0			0
+66751			0			0
+18074			-1600			21
+18969			-1600			18
+66563			0			0
+66416			0			0
+65500			0			0
+66606			0			0
+66064			0			0
+66665			0			0
+66681			0			0
+18967			-1600			18
+
+--------------------------------------------------------------------------------------------
+
+
+
+============================================================================================
+					  JOINS :
+============================================================================================
+
+- Joins are used as an SQL JOIN clause  that combines rows from two or more tables.
+- It creates a set of rows in a temporary table.
+
+--------------------------------------------------------------------------------------------
+					INNER JOIN :
+--------------------------------------------------------------------------------------------
+
+- The INNER JOIN selects all rows from both participating tables as 
+  long as contents of the columns match. 
+- An SQL INNER JOIN is same as JOIN clause, combining rows from two or more tables.
+
+
+SELECT pmt_sr_no,pmt_operational_voltage1,amplifier_sr_no,amplifier_type
+FROM pmt
+INNER JOIN amplifier
+ON  pmt.pmt_id = amplifier.amplifier_id;
+
+
+pmt_sr_no	pmt_operational_voltage1    amplifier_sr_no	amplifier_type
+66600			0			qq			q
+66064			0			amp235			PHI
+66665			0			q			a
+66680			0			qqq			q
+66678			0			AMP24			PHI
+66362			0			12			12
+66686			0			9			9
+
+--------------------------------------------------------------------------------------------
+					LFET JOIN :
+--------------------------------------------------------------------------------------------
+
+-Joins two tables and fetches rows based on a condition, 
+ which are matching in both the tables. 
+-The unmatched rows will also be available from the table before the
+ join clause.i.e the left table. 
+
+SELECT pmt_sr_no,pmt_operational_voltage1,amplifier_sr_no,amplifier_type
+FROM pmt
+LEFT JOIN amplifier
+ON pmt.pmt_id = amplifier.amplifier_id;
+
+
+pmt_sr_no	pmt_operational_voltage1    amplifier_sr_no	   amplifier_type
+66353		0				NULL			NULL
+66751		0				NULL			NULL
+18074		-1600				NULL			NULL
+18969		-1600				NULL			NULL
+65697		0				NULL			NULL
+66563		0				NULL			NULL
+65511		0				NULL			NULL
+66363		0				NULL			NULL
+66416		0				NULL			NULL
+65500		0				NULL			NULL
+65505		0				NULL			NULL
+66600		0				qq			q
+66606		0				NULL			NULL
+66064		0				amp235			PHI
+66665		0				q			a
+66681		0				NULL			NULL
+18967		-1600				NULL			NULL
+18961		-1600				NULL			NULL
+
+
+--------------------------------------------------------------------------------------------
+					RIGHT JOIN :
+--------------------------------------------------------------------------------------------
+
+-Joins two tables and fetches rows based on a condition, 
+ which are matching in both the tables. 
+-The unmatched rows will also be available from the table after the
+ join clause.i.e the right table. 
+
+
+SELECT pmt_sr_no,pmt_operational_voltage1,amplifier_sr_no,amplifier_type
+FROM pmt
+RIGHT JOIN amplifier
+ON pmt.pmt_id = amplifier.amplifier_id;
+
+
+pmt_sr_no	pmt_operational_voltage1   amplifier_sr_no	  amplifier_type
+66600			0			qq			q
+66064			0			amp235			PHI
+66665			0			q			a
+66680			0			qqq			q
+66678			0			AMP24			PHI
+66362			0			12			12
+66686			0			9			9
+
+
+--------------------------------------------------------------------------------------------
+					NATURAL JOIN :
+--------------------------------------------------------------------------------------------
+
+- The associated tables have one or more pairs of identically named columns.
+- The columns must be the same data type.
+- Not to use ON clause in a natural join.
+
+SELECT pmt_sr_no,pmt_operational_voltage1,amplifier_sr_no,amplifier_type
+FROM pmt
+NATURAL JOIN amplifier;
+
+
+
+
+pmt_sr_no	pmt_operational_voltage1    amplifier_sr_no	  amplifier_type
+66353			0			qq			q
+66353			0			amp235			PHI
+66353			0			q			a
+66353			0			qqq			q
+66353			0			AMP24			PHI
+66353			0			12			12
+66353			0			9			9
+66751			0			qq			q
+66751			0			amp235			PHI
+66751			0			q			a
+66751			0			qqq			q
+66751			0			AMP24			PHI
+66751			0			12			12
+66751			0			9			9
+18074			-1600			qq			q
+18074			-1600			amp235			PHI
+18074			-1600			q			a
+18074			-1600			qqq			q
+18074			-1600			AMP24			PHI
+18074			-1600			12			12
+
+--------------------------------------------------------------------------------------------
+					CROSS JOIN :
+--------------------------------------------------------------------------------------------
+
+- This kind of result is called as Cartesian Product.
+- If, WHERE clause is used with CROSS JOIN, it functions like an INNER JOIN.
+
+
+SELECT pmt_sr_no,pmt_operational_voltage1,amplifier_sr_no,amplifier_type
+FROM pmt
+CROSS JOIN amplifier;
+
+
+
+pmt_sr_no	pmt_operational_voltage1   amplifier_sr_no	    amplifier_type
+66353			0			qq			q
+66353			0			amp235			PHI
+66353			0			q			a
+66353			0			qqq			q
+66353			0			AMP24			PHI
+66353			0			12			12
+66353			0			9			9
+66751			0			qq			q
+66751			0			amp235			PHI
+66751			0			q			a
+66751			0			qqq			q
+66751			0			AMP24			PHI
+66751			0			12			12
+66751			0			9			9
+18074			-1600			qq			q
+18074			-1600			amp235			PHI
+18074			-1600			q			a
+18074			-1600			qqq			q
+18074			-1600			AMP24			PHI
+18074			-1600			12			12
+18074			-1600			9			9
+18969			-1600			qq			q
+18969			-1600			amp235			PHI
+18969			-1600			q			a
+18969			-1600			qqq			q
+18969			-1600			AMP24			PHI
+18969			-1600			12			12
+
+--------------------------------------------------------------------------------------------
+
+
+
+
+
+
+============================================================================================
+					Migrations :
+============================================================================================
+
+--------------------------------------------------------------------------------------------
+				Migration to Remove column :
+--------------------------------------------------------------------------------------------
+
+$ rails generate migration RemoveContentFromMicroposts content:string
+
+Generated Migration :
+
+class RemoveContentFromMicroposts < ActiveRecord::Migration
+  def change
+    remove_column :microposts, :content, :string
+  end
+end
+
+Tasks: TOP => db:migrate
+(See full trace by running task with --trace)
+suyogrnerkar@suyogrnerkar-XPS-L501X:~/Projects/sample_app$ rake db:migrate
+==  RemoveContentFromMicroposts: migrating ====================================
+-- remove_column(:microposts, :content, :string)
+
+
+
+--------------------------------------------------------------------------------------------
+			Migration to add contents column to microposts :
+--------------------------------------------------------------------------------------------
+
+$ rails generate migration AddContentToMicroposts content:string
+
+class AddContentToMicroposts < ActiveRecord::Migration
+  def change
+    add_column :microposts, :content, :string
+  end
+end
+
+==  AddContentToMicroposts: migrating =========================================
+-- add_column(:microposts, :content, :string)
+   -> 0.2385s
+==  AddContentToMicroposts: migrated (0.2387s) ================================
+
+
+--------------------------------------------------------------------------------------------
+				Rollback on Migration
+--------------------------------------------------------------------------------------------
+
+$ rake db:rollback
+==  AddContentToMicroposts: reverting =========================================
+-- remove_column(:microposts, :content, :string)
+   -> 0.2500s
+==  AddContentToMicroposts: reverted (0.2669s) ================================
+
+
+
+--------------------------------------------------------------------------------------------
+			Migrate a Migration Version Specific
+--------------------------------------------------------------------------------------------
+
+$ rake db:migrate VERSION=20140110094702
+==  RemoveContentFromMicroposts: reverting ====================================
+-- add_column(:microposts, :content, :string)
+   -> 0.2400s
+==  RemoveContentFromMicroposts: reverted (0.2423s) ===========================
+
+==  CreateRelationships: reverting ============================================
+-- remove_index(:relationships, {:unique=>true, :column=>[:follower_id, :followed_id]})
+   -> 0.1261s
+-- remove_index(:relationships, {:column=>:followed_id})
+   -> 0.1455s
+-- remove_index(:relationships, {:column=>:follower_id})
+   -> 0.1450s
+-- drop_table(:relationships)
+   -> 0.0339s
+==  CreateRelationships: reverted (0.4514s) ===================================
+
+==  CreateMicroposts: reverting ===============================================
+-- remove_index(:microposts, {:column=>[:user_id, :created_at]})
+   -> 0.1223s
+-- drop_table(:microposts)
+   -> 0.0449s
+==  CreateMicroposts: reverted (0.1678s) ======================================
+
+
+
+--------------------------------------------------------------------------------------------
+			Rollback on Migration Version Specific
+--------------------------------------------------------------------------------------------
+
+rake db:rollback VERSION=20140110094702
+==  AddContentToMicroposts: reverting =========================================
+-- remove_column(:microposts, :content, :string)
+   -> 0.2448s
+==  AddContentToMicroposts: reverted (0.2473s) ================================
+
+
+
+
+
+
+
